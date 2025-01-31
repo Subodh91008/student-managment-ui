@@ -1,0 +1,122 @@
+<nav class="navbar">
+
+    <!-- Right Side: Round Logo -->
+    <div class="navbar-logo-right">
+        <img src="assets/logo.png" alt="Logo" class="round-logo">
+      </div>
+
+    <!-- Left Side: Brand and Toggle Button -->
+    <div class="navbar-brand">
+      <a href="#" class="navbar-logo">Student Management</a>
+      <button class="navbar-toggle" (click)="toggleNavbar()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  
+    <!-- Middle: Navigation Links -->
+    <ul class="navbar-links" [class.active]="isNavbarActive">
+      <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fas fa-user-graduate"></i> Students</a></li>
+      <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+      <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
+      <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+      <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+    </ul>  
+  </nav>
+
+
+
+
+
+
+  <div class="body-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Welcome to Student Management System</h1>
+        <p>Efficiently manage students, teachers, courses, and schedules in one place.</p>
+        <a class="cta-button" routerLink="layout">Get Started</a>
+      </div>
+    </section>
+  
+    <!-- Features Section -->
+    <section class="features-section">
+      <h2>Why Choose Us?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-user-graduate"></i>
+          <h3>Student Management</h3>
+          <p>Easily manage student records, attendance, and performance.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>Teacher Management</h3>
+          <p>Assign teachers to courses and track their schedules.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-book"></i>
+          <h3>Course Management</h3>
+          <p>Organize courses, assignments, and exams seamlessly.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h3>Schedule Management</h3>
+          <p>Create and manage class schedules with ease.</p>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Call-to-Action Section -->
+    <section class="cta-section">
+      <h2>Ready to Get Started?</h2>
+      <p>Join thousands of institutions managing their students efficiently with our system.</p>
+      <a href="#" class="cta-button">Sign Up Now</a>
+    </section>
+  </div>
+
+
+
+
+
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-user-graduate"></i> Students</a></li>
+          <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+          <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
+          <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+          <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+      </div>
+  
+      <!-- Contact Information -->
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> 123 School Street, City, Country</li>
+          <li><i class="fas fa-phone"></i> +123 456 7890</li>
+          <li><i class="fas fa-envelope"></i> infostudentmanagement.com</li>
+        </ul>
+      </div>
+  
+      <!-- Social Media -->
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2023 Student Management System. All rights reserved.</p>
+    </div>
+  </footer>

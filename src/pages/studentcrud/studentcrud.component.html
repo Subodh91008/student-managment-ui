@@ -1,0 +1,82 @@
+<div class="container mt-4">
+    <h2 class="text-center">Student Management</h2>
+  
+    <!-- Add Student Button -->
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success" (click)="openAddStudentModal(studentModal)">
+        <fa-icon [icon]="faPlus"></fa-icon> Add Student
+      </button>
+    </div>
+  
+    <!-- Responsive Table Wrapper -->
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>S.No.</th>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.rollNumber }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.subject }}</td>
+                <td>{{ student.address }}</td>
+            <td class="text-center">
+              <div class="action-buttons">
+                <button class="btn btn-warning btn-sm" (click)="openEditStudentModal(studentModal, student)">
+                  <fa-icon [icon]="faEdit"></fa-icon>Edit
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">
+                  <fa-icon [icon]="faTrash"></fa-icon>Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Add/Edit Student Modal -->
+    <ng-template #studentModal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="studentModalLabel">
+          <fa-icon [icon]="isEditMode ? faEdit : faPlus"></fa-icon> 
+          {{ isEditMode ? 'Edit Student' : 'Add Student' }}
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="studentName" class="form-label">Student Name</label>
+            <input type="text" id="studentName" class="form-control" [(ngModel)]="selectedStudent.name" name="name" placeholder="Enter student name">
+          </div>
+          <div class="mb-3">
+            <label for="studentEmail" class="form-label">Email</label>
+            <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.email" name="email" placeholder="Enter email">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
+          <fa-icon [icon]="faTimes"></fa-icon> Close
+        </button>
+        <button type="button" class="btn btn-success" (click)="saveStudent()">
+          <fa-icon [icon]="faSave"></fa-icon> 
+          {{ isEditMode ? 'Update' : 'Save' }}
+        </button>
+      </div>
+    </ng-template>
+  </div>
+  
