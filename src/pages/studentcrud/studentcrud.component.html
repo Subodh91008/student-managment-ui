@@ -14,8 +14,8 @@
         <thead class="table-dark">
             <tr>
                 <th>S.No.</th>
-                <th>Name</th>
                 <th>Roll Number</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Subject</th>
                 <th>Address</th>
@@ -25,8 +25,8 @@
             <tbody>
               <tr *ngFor="let student of students; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ student.name }}</td>
                 <td>{{ student.rollNumber }}</td>
+                <td>{{ student.name }}</td>
                 <td>{{ student.email }}</td>
                 <td>{{ student.subject }}</td>
                 <td>{{ student.address }}</td>
@@ -58,6 +58,12 @@
       </div>
       <div class="modal-body">
         <form>
+
+            <div class="mb-3">
+                <label for="studentName" class="form-label">Rollnumber</label>
+                <input type="text" id="studentName" class="form-control" [(ngModel)]="selectedStudent.rollNumber" name="rollNumber" placeholder="Enter rollNumber">
+              </div>
+
           <div class="mb-3">
             <label for="studentName" class="form-label">Student Name</label>
             <input type="text" id="studentName" class="form-control" [(ngModel)]="selectedStudent.name" name="name" placeholder="Enter student name">
@@ -66,6 +72,18 @@
             <label for="studentEmail" class="form-label">Email</label>
             <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.email" name="email" placeholder="Enter email">
           </div>
+
+          <div class="mb-3">
+            <label for="studentEmail" class="form-label">Subject</label>
+            <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.subject" name="subject" placeholder="Enter subject">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="studentEmail" class="form-label">address</label>
+            <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.address" name="email" placeholder="Enter address">
+          </div>
+
         </form>
       </div>
       <div class="modal-footer">
