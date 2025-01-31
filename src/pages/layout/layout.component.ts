@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit{
   ngOnInit(): void {
     this.router.navigateByUrl('layout/dashboard')
   }
-  isSidebarActive = true;
+  isSidebarActive = false;
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
