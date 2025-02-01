@@ -1,57 +1,42 @@
-<nav class="navbar">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="">
 
-  <!-- Right Side: Round Logo -->
-  <div class="navbar-logo-right">
-      <img src="assets/logo.png" alt="Logo" class="round-logo">
+            <h1>Login</h1>
+
+            <div class="input-box">
+                <input type="text" [(ngModel)]="loginObj.email" name="email" placeholder="Email">
+                <i class='bx bxs-envelope'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Password">
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+
+            <div class="remember-forget">
+                <label><input type="checkbox">Remember me</label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit" (click)="onlogin(loginObj)"  class="btn">Login</button>
+
+            <div class="register-link">
+                <p>Don't have an account? <br>
+                <a (click)="register()">Register</a></p>
+            </div>
+
+        </form>
+
     </div>
-
-  <!-- Left Side: Brand and Toggle Button -->
-  <div class="navbar-brand">
-    <a href="#" class="navbar-logo">Student Management</a>
-    <button class="navbar-toggle" (click)="toggleNavbar()">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-
-  <!-- Middle: Navigation Links -->
-  <ul class="navbar-links" [class.active]="isNavbarActive">
-    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-    <li><a href="#"><i class="fas fa-user-graduate"></i> Students</a></li>
-    <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
-    <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
-    <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
-    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-  </ul>  
-</nav>
-
-
-<div class="login-container">
-    <div class="overlay"></div>
-    <div class="login-box">
-      <div class="login-header text-center">
-        <h2><i class="fas fa-user-circle"></i> Login</h2>
-        <p>Welcome back! Please sign in to continue.</p>
-      </div>
-      <form class="login-form">
-        <div class="form-group floating-label">
-          <input type="text" id="username" [(ngModel)]="loginObj.email" name="email" class="form-control" placeholder=" " required>
-          <label for="username"><i class="fas fa-user"></i> Username</label>
-        </div>
-        <div class="form-group floating-label">
-          <input type="password" id="password"  [(ngModel)]="loginObj.password" name="password" class="form-control" placeholder=" " required>
-          <label for="password"><i class="fas fa-lock"></i> Password</label>
-        </div>
-        <div class="form-group form-check">
-          <input type="checkbox" id="rememberMe" class="form-check-input">
-          <label for="rememberMe" class="form-check-label">Remember me</label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block" (click)="onlogin(loginObj)">Login</button>
-        <div class="text-center mt-3">
-          <a href="#" class="forgot-password">Forgot password?</a>
-        </div>
-        <div class="text-center mt-3">
-          <p class="signup-link">Don't have an account? <a (click)="register()">Sign up</a></p>
-        </div>
-      </form>
-    </div>
-  </div>
+</body>
+</html>
