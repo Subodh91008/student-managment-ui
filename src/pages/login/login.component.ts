@@ -45,12 +45,15 @@ constructor(private router:Router,private loginservice:LoginService){}
         }, 2000);
       },
       error: (error) => {
+        
         // Remove token if login fails
         localStorage.removeItem('token');
   
         // Extract meaningful error message
         let errorMessage = 'Something went wrong! Check username or password.';
+       
         if (error.error && error.error.message) {
+         
           errorMessage = error.error.message;
         } else if (error.status) {
           errorMessage = `Error ${error.status}: ${error.statusText}`;
@@ -60,6 +63,7 @@ constructor(private router:Router,private loginservice:LoginService){}
         alert(errorMessage);
         console.error('Error while login:', error);
         this.showErrorMessage();
+        
       },
       complete: () => {
         console.log('Login request completed.');
