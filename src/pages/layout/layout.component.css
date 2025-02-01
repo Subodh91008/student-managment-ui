@@ -2,25 +2,35 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
-/* Navbar Styles */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2c3e50;
+  background-color: #333;
   color: white;
   padding: 10px 20px;
   position: fixed;
-  width: 100%;
   top: 0;
+  width: 100%;
   z-index: 1000;
 }
 
-.navbar-left, .navbar-right {
+.navbar-left {
   display: flex;
   align-items: center;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
 }
 
 .sidebar-toggle {
@@ -29,36 +39,29 @@ body {
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
-  margin-right: 15px;
 }
 
-.navbar-brand {
-  font-size: 1.2rem;
-  font-weight: bold;
+.navbar-right {
+  display: flex;
+  gap: 15px;
 }
 
 .nav-link {
   color: white;
   text-decoration: none;
-  margin-left: 15px;
   font-size: 1rem;
-  cursor: pointer;
 }
 
-.nav-link i {
-  margin-right: 5px;
-}
-
-/* Sidebar Styles */
+/* Sidebar */
 .sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #34495e;
   position: fixed;
-  top: 55px;
+  top: 0;
   left: -250px;
+  width: 150px;
+  height: 100%;
+  background-color: #222;
+  padding-top: 60px;
   transition: left 0.3s ease;
-  z-index: 999;
 }
 
 .sidebar.active {
@@ -68,65 +71,57 @@ body {
 .sidebar-menu {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .sidebar-menu li {
-  padding: 15px 20px;
-  border-bottom: 1px solid #2c3e50;
+  padding: 15px;
 }
 
-.sidebar-menu li a {
+.sidebar-menu a {
   color: white;
   text-decoration: none;
   display: flex;
   align-items: center;
+  font-size: 1.1rem;
 }
 
-.sidebar-menu li a i {
+.sidebar-menu a i {
   margin-right: 10px;
 }
 
-/* Main Content Styles */
+/* Main Content */
 .main-content {
-  margin-top: 60px;
-  padding: 20px;
   transition: margin-left 0.3s ease;
+  padding: 20px;
+  margin-top: 60px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-content.sidebar-active {
   margin-left: 250px;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .sidebar {
-    left: -250px;
-  }
-
-  .sidebar.active {
-    left: 0;
-  }
-
-  .main-content {
-    margin-left: 0;
-  }
-
-  .main-content.sidebar-active {
-    margin-left: 250px;
-  }
+/* Responsive Router Outlet */
+router-outlet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
 }
 
-@media (min-width: 769px) {
+/* Responsive Design */
+@media screen and (max-width: 250px) {
   .sidebar {
-    left: 0;
+    width: 75px;
   }
-
-  .main-content {
-    margin-left: 250px;
+  .main-content.sidebar-active {
+    margin-left: 0;
   }
-
-  .sidebar-toggle {
-    display: none;
+  router-outlet {
+    width: 100%;
+   
   }
 }
