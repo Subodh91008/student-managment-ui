@@ -5,30 +5,36 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { RegistrationComponent } from '../pages/registration/registration.component';
 import { StudentcrudComponent } from '../pages/studentcrud/studentcrud.component';
+import { authguardGuard } from '../guard/auth.guard';
 
 export const routes: Routes = [
-    {path:'',
-        component:HomeComponent,
-        
-    },{
+    {
+        path:'login',
+        component:LoginComponent
+    }
+    ,{
+        path:'registration',
+        component:RegistrationComponent
+    }
+    ,
+    {
         path:'layout',
         component:LayoutComponent,
         children:[
             {
                 path:'dashboard',
-                component:DashboardComponent
-            },
-            {
-                path:'login',
-                component:LoginComponent
+                component:DashboardComponent,
+                canActivate:[authguardGuard]
             }
+            
             ,{
-                path:'registration',
-                component:RegistrationComponent
-            },{
                 path:'crud',
-                component:StudentcrudComponent
+                component:StudentcrudComponent,
+                canActivate:[authguardGuard]
             }
         ]
-    }
+    },
+    { path: '', component: HomeComponent }, 
+    { path: '**', redirectTo: '', pathMatch: 'full' } 
+   
 ];

@@ -18,4 +18,10 @@ export class LayoutComponent implements OnInit{
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
+
+  logout(){
+    if (confirm('Are you sure you want to Logout?')){
+      this.router.navigateByUrl('');
+    }
+  }
 }

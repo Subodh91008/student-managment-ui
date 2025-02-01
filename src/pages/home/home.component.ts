@@ -17,6 +17,7 @@ export class HomeComponent {
   }
 
   getStart(){
-  this.router.navigateByUrl('layput')
+    debugger
+  this.router.navigateByUrl('login')
   }
 }

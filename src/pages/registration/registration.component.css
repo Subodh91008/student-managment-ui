@@ -1,133 +1,91 @@
-/* Background Image with Gradient Overlay */
+/* Background Image */
 .registration-container {
-    background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-image: url('https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Form Styling */
+.registration-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+}
+
+.registration-form h2 {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.text-danger {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .registration-form {
     padding: 20px;
-    position: relative;
   }
-  
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+
+  .registration-form h2 {
+    font-size: 24px;
   }
-  
-  /* Registration Box */
-  .registration-box {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-    width: 100%;
-    max-width: 800px;
-    z-index: 1;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Header */
-  .registration-header {
-    margin-bottom: 20px;
-  }
-  
-  .registration-header h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .registration-header p {
-    color: #666;
-    font-size: 0.9rem;
-  }
-  
-  /* Form Styles */
-  fieldset {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  legend {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    padding: 0 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-weight: 500;
-    color: #555;
-  }
-  
-  .form-control {
-    border-radius: 5px;
-    border: 1px solid #ddd;
+
+  .form-control, .form-select {
     padding: 10px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+    font-size: 14px;
   }
-  
-  .form-control:focus {
-    border-color: #6a11cb;
-    outline: none;
-    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
-  }
-  
-  /* Buttons */
-  .btn {
-    padding: 12px 30px;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
+
   .btn-primary {
-    background-color: #6a11cb;
-    border: none;
-    width: 40%;
+    padding: 10px;
+    font-size: 16px;
   }
-  
-  .btn-primary:hover {
-    background-color: #2575fc;
-    transform: translateY(-2px);
-   
-  }
-  
-  .btn-secondary {
-    background-color: #d75f5f;
-    border: none;
-    margin-left: 100px;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #f10707;
-    transform: translateY(-2px);
-  }
-  
-  .btn:active {
-    transform: translateY(0);
-  }
+}

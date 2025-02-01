@@ -1,78 +1,97 @@
 <div class="registration-container">
-    <div class="overlay"></div>
-    <div class="registration-box">
-      <div class="registration-header text-center">
-        <h2><i class="fas fa-user-graduate"></i> Student Registration</h2>
-        <p>Please fill out the form to register as a student.</p>
-      </div>
-      <form class="registration-form">
-        <!-- Personal Details -->
-        <fieldset>
-          <legend><i class="fas fa-user"></i> Personal Details</legend>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="firstName"><i class="fas fa-signature"></i> First Name</label>
-                <input type="text" id="firstName" class="form-control" placeholder="Enter your first name" required>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="lastName"><i class="fas fa-signature"></i> Last Name</label>
-                <input type="text" id="lastName" class="form-control" placeholder="Enter your last name" required>
-              </div>
+  <div class="registration-form">
+    <h2 class="text-center mb-4">Registration Form</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <!-- First Name and Last Name in One Line -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="firstName" class="form-label">
+              <i class="fas fa-user"></i> First Name
+            </label>
+            <input type="text" [(ngModel)]="signupRequest.firstName" name="firstName" id="firstName" formControlName="firstName" class="form-control" placeholder="Enter your first name" />
+            <div *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched" class="text-danger">
+              First Name is required.
             </div>
           </div>
-          <div class="form-group">
-            <label for="dob"><i class="fas fa-calendar-alt"></i> Date of Birth</label>
-            <input type="date" id="dob" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="gender"><i class="fas fa-venus-mars"></i> Gender</label>
-            <select id="gender" class="form-control" required>
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </fieldset>
-  
-        <!-- Contact Information -->
-        <fieldset>
-          <legend><i class="fas fa-address-book"></i> Contact Information</legend>
-          <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email</label>
-            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-          </div>
-          <div class="form-group">
-            <label for="phone"><i class="fas fa-phone"></i> Phone</label>
-            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
-          </div>
-          <div class="form-group">
-            <label for="address"><i class="fas fa-map-marker-alt"></i> Address</label>
-            <textarea id="address" class="form-control" rows="3" placeholder="Enter your address" required></textarea>
-          </div>
-        </fieldset>
-  
-        <!-- Educational Background -->
-        <fieldset>
-          <legend><i class="fas fa-graduation-cap"></i> Educational Background</legend>
-          <div class="form-group">
-            <label for="school"><i class="fas fa-school"></i> School Name</label>
-            <input type="text" id="school" class="form-control" placeholder="Enter your school name" required>
-          </div>
-          <div class="form-group">
-            <label for="grade"><i class="fas fa-chart-line"></i> Grade/Class</label>
-            <input type="text" id="grade" class="form-control" placeholder="Enter your grade/class" required>
-          </div>
-        </fieldset>
-  
-        <!-- Buttons -->
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary btn-lg">Register</button>
-          <button type="reset" class="btn btn-secondary btn-lg ml-3">Reset</button>
         </div>
-      </form>
-    </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="lastName" class="form-label">
+              <i class="fas fa-user"></i> Last Name
+            </label>
+            <input type="text" [(ngModel)]="signupRequest.lastName" name="lastName" id="lastName" formControlName="lastName" class="form-control" placeholder="Enter your last name" />
+            <div *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched" class="text-danger">
+              Last Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group mb-3">
+        <label for="phone" class="form-label">
+          <i class="fas fa-phone"></i> Phone
+        </label>
+        <input type="tel" id="phone" [(ngModel)]="signupRequest.phone" name="phone" formControlName="phone" class="form-control" placeholder="Enter your phone number" />
+        <div *ngIf="registrationForm.get('phone')?.invalid && registrationForm.get('phone')?.touched" class="text-danger">
+          Please enter a valid phone number (10 digits).
+        </div>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group mb-3">
+        <label for="gender" class="form-label">
+          <i class="fas fa-venus-mars"></i> Gender
+        </label>
+        <select id="gender" [(ngModel)]="signupRequest.gender" name="gender" formControlName="gender" class="form-select">
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <div *ngIf="registrationForm.get('gender')?.invalid && registrationForm.get('gender')?.touched" class="text-danger">
+          Gender is required.
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group mb-3">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope"></i> Email
+        </label>
+        <input type="email" id="email" [(ngModel)]="signupRequest.email" name="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched" class="text-danger">
+          Please enter a valid email address.
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group mb-3">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i> Password
+        </label>
+        <input type="password" id="password" [(ngModel)]="signupRequest.password" name="password" formControlName="password" class="form-control" placeholder="Enter your password" />
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched" class="text-danger">
+          Password must be at least 6 characters long.
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group mb-4">
+        <label for="confirmPassword" class="form-label">
+          <i class="fas fa-lock"></i> Confirm Password
+        </label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm your password" />
+        <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched" class="text-danger">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="registrationForm.invalid">
+        Register
+      </button>
+    </form>
   </div>
+</div>

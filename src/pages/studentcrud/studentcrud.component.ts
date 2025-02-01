@@ -1,18 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEdit, faPlus, faSave, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { StudentMangementService } from '../../service/student-mangament/student-mangement.service';
+import { Student } from '../../classes/student';
 
-interface Student {
-  id: number;
-  name: string;
-  email: string;
-  rollNumber:string;
-  subject:string;
-  address:string
-}
 
 @Component({
   selector: 'app-studentcrud',
@@ -20,15 +14,12 @@ interface Student {
   templateUrl: './studentcrud.component.html',
   styleUrl: './studentcrud.component.css'
 })
-export class StudentcrudComponent {
+export class StudentcrudComponent implements OnInit {
 
   
-  students: Student[] = [
-    { id: 1, name: 'John Doe', email: 'john@example.com',rollNumber:'101', subject:'java',address:'gokulpur'},
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com',rollNumber:'102', subject:'boot',address:'purnia' }
-  ];
+  students: Student[] = [];
 
-  selectedStudent: Student = { id: 0, name: '', email: '',rollNumber:'', subject:'',address:'' };
+  selectedStudent: Student = { sid: 0, name: '', email: '',rollnumber:'', subject:'',address:'',phone:''};
   isEditMode: boolean = false;
 
   // Font Awesome Icons
@@ -38,11 +29,14 @@ export class StudentcrudComponent {
   faSave = faSave;
   faTimes = faTimes;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal, private service:StudentMangementService) {}
+  ngOnInit(): void {
+   this.getAllStudent();
+  }
 
   openAddStudentModal(content: any) {
     this.isEditMode = false;
-    this.selectedStudent = { id: 0, name: '', email: '',rollNumber:'', subject:'',address:'' };
+    this.selectedStudent = { sid: 0, name: '', email: '',rollnumber:'', subject:'',address:'',phone:'' };
     this.modalService.open(content, { ariaLabelledBy: 'studentModalLabel', size: 'lg', centered: true });
   }
 
@@ -52,22 +46,47 @@ export class StudentcrudComponent {
     this.modalService.open(content, { ariaLabelledBy: 'studentModalLabel', size: 'lg', centered: true });
   }
 
-  saveStudent() {
+  saveStudent(request:Student) {
     if (this.isEditMode) {
-      const index = this.students.findIndex(s => s.id === this.selectedStudent.id);
-      if (index !== -1) {
-        this.students[index] = { ...this.selectedStudent };
-      }
+      debugger
+      this.service.updateStudent(request).subscribe({
+        next:(response:string)=>{
+          alert(response);
+          this.getAllStudent();
+       }
+     
+      })
     } else {
-      const newStudent = { ...this.selectedStudent, id: this.students.length + 1 };
-      this.students.push(newStudent);
+      this.service.saveStudent(request).subscribe({
+        next:(response:string)=>{
+           alert(response);
+           this.getAllStudent();
+        }
+      })
     }
     this.modalService.dismissAll(); // Close modal
   }
 
   deleteStudent(id: number) {
     if (confirm('Are you sure you want to delete this student?')) {
-      this.students = this.students.filter(student => student.id !== id);
+     this.service.deleteStudent(id).subscribe({
+
+      next:(response)=>{
+        alert(response);
+        this.getAllStudent();
+      }
+     })
     }
+  }
+  getAllStudent(){
+    this.service.getAllStudent().subscribe({
+      next:(response:any)=>{
+        console.log(response);
+        this.students=response;
+      },error:(error)=>{
+        alert('something went wrong');
+        console.log('error while fetching record in db',error);
+      }
+    });
   }
 }

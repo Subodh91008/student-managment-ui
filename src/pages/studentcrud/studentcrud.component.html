@@ -17,6 +17,7 @@
                 <th>Roll Number</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>PhoneNumber</th>
                 <th>Subject</th>
                 <th>Address</th>
                 <th>Action</th>
@@ -25,9 +26,10 @@
             <tbody>
               <tr *ngFor="let student of students; let i = index">
                 <td>{{ i + 1 }}</td>
-                <td>{{ student.rollNumber }}</td>
+                <td>{{ student.rollnumber }}</td>
                 <td>{{ student.name }}</td>
                 <td>{{ student.email }}</td>
+                <td>{{ student.phone }}</td>
                 <td>{{ student.subject }}</td>
                 <td>{{ student.address }}</td>
             <td class="text-center">
@@ -35,7 +37,7 @@
                 <button class="btn btn-warning btn-sm" (click)="openEditStudentModal(studentModal, student)">
                   <fa-icon [icon]="faEdit"></fa-icon>Edit
                 </button>
-                <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.id)">
+                <button class="btn btn-danger btn-sm" (click)="deleteStudent(student.sid)">
                   <fa-icon [icon]="faTrash"></fa-icon>Delete
                 </button>
               </div>
@@ -61,7 +63,7 @@
 
             <div class="mb-3">
                 <label for="studentName" class="form-label">Rollnumber</label>
-                <input type="text" id="studentName" class="form-control" [(ngModel)]="selectedStudent.rollNumber" name="rollNumber" placeholder="Enter rollNumber">
+                <input type="text" id="studentName" class="form-control" [(ngModel)]="selectedStudent.rollnumber" name="rollNumber" placeholder="Enter rollNumber">
               </div>
 
           <div class="mb-3">
@@ -74,14 +76,19 @@
           </div>
 
           <div class="mb-3">
-            <label for="studentEmail" class="form-label">Subject</label>
-            <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.subject" name="subject" placeholder="Enter subject">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="email" id="phone" class="form-control" [(ngModel)]="selectedStudent.phone" name="phone" placeholder="Enter email">
+          </div>
+
+          <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="email" id="subject" class="form-control" [(ngModel)]="selectedStudent.subject" name="subject" placeholder="Enter subject">
           </div>
 
 
           <div class="mb-3">
-            <label for="studentEmail" class="form-label">address</label>
-            <input type="email" id="studentEmail" class="form-control" [(ngModel)]="selectedStudent.address" name="email" placeholder="Enter address">
+            <label for="address" class="form-label">address</label>
+            <input type="email" id="address" class="form-control" [(ngModel)]="selectedStudent.address" name="address" placeholder="Enter address">
           </div>
 
         </form>
@@ -90,7 +97,7 @@
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">
           <fa-icon [icon]="faTimes"></fa-icon> Close
         </button>
-        <button type="button" class="btn btn-success" (click)="saveStudent()">
+        <button type="button" class="btn btn-success" (click)="saveStudent(selectedStudent)">
           <fa-icon [icon]="faSave"></fa-icon> 
           {{ isEditMode ? 'Update' : 'Save' }}
         </button>

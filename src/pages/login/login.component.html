@@ -1,3 +1,30 @@
+<nav class="navbar">
+
+  <!-- Right Side: Round Logo -->
+  <div class="navbar-logo-right">
+      <img src="assets/logo.png" alt="Logo" class="round-logo">
+    </div>
+
+  <!-- Left Side: Brand and Toggle Button -->
+  <div class="navbar-brand">
+    <a href="#" class="navbar-logo">Student Management</a>
+    <button class="navbar-toggle" (click)="toggleNavbar()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <!-- Middle: Navigation Links -->
+  <ul class="navbar-links" [class.active]="isNavbarActive">
+    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="#"><i class="fas fa-user-graduate"></i> Students</a></li>
+    <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a></li>
+    <li><a href="#"><i class="fas fa-book"></i> Courses</a></li>
+    <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+  </ul>  
+</nav>
+
+
 <div class="login-container">
     <div class="overlay"></div>
     <div class="login-box">
@@ -7,18 +34,18 @@
       </div>
       <form class="login-form">
         <div class="form-group floating-label">
-          <input type="text" id="username" class="form-control" placeholder=" " required>
+          <input type="text" id="username" [(ngModel)]="loginObj.email" name="email" class="form-control" placeholder=" " required>
           <label for="username"><i class="fas fa-user"></i> Username</label>
         </div>
         <div class="form-group floating-label">
-          <input type="password" id="password" class="form-control" placeholder=" " required>
+          <input type="password" id="password"  [(ngModel)]="loginObj.password" name="password" class="form-control" placeholder=" " required>
           <label for="password"><i class="fas fa-lock"></i> Password</label>
         </div>
         <div class="form-group form-check">
           <input type="checkbox" id="rememberMe" class="form-check-input">
           <label for="rememberMe" class="form-check-label">Remember me</label>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="onlogin(loginObj)">Login</button>
         <div class="text-center mt-3">
           <a href="#" class="forgot-password">Forgot password?</a>
         </div>
