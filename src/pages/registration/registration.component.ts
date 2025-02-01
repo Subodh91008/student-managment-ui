@@ -48,22 +48,37 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      debugger
-      console.log(this.signupRequest);
-      console.log('Form Submitted', this.registrationForm.value);
-      this.service.signup(this.signupRequest).subscribe({
-        next:(result)=>{
-          alert("succesfuuly singup");
-          this.router.navigateByUrl('login');
-        },error:(error)=>{
-          alert('somethin went wrong');
-          console.log('error while restration',error);
-        }
-        
-      });
-    } else {
+    if (this.registrationForm.invalid) {
       console.log('Form is invalid');
+      return;
     }
+  
+    console.log('Form Submitted:', this.registrationForm.value);
+  
+    this.service.signup(this.signupRequest).subscribe({
+      next: (result) => {
+        alert('Successfully signed up');
+        this.router.navigateByUrl('login');
+      },
+      error: (error) => {
+        console.error('Error during registration:', error);
+  
+        // Default error message
+        let errorMessage = 'Something went wrong. Please try again.';
+  
+        // Safely extract API error message
+        if (error.error && typeof error.error === 'object' && error.error.message) {
+          errorMessage = error.error.message;
+        } else if (error.status) {
+          errorMessage = `Error ${error.status}: ${error.statusText}`;
+        }
+  
+        alert(errorMessage);
+      }
+    });
   }
+  
+  
+  
 }
+  

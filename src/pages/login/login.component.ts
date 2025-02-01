@@ -30,26 +30,93 @@ constructor(private router:Router,private loginservice:LoginService){}
     this.isNavbarActive = !this.isNavbarActive;
   }
 
-  onlogin(loginUser:LoginUser){
-    debugger
+  onLogin(loginUser: LoginUser) {
     this.loginservice.userLogin(loginUser).subscribe({
-      
-      next:(result:any)=>{
-      
-         console.log(result.jwt)
-        localStorage.setItem("token",result.jwt);
-        console.log(localStorage.getItem);
-        this.router.navigateByUrl('layout');
-      },error:(error)=>{
-        localStorage.removeItem('token')
-        alert("something went wrong!!!! check username or password");
-        console.log("error while login",error);
-      },complete:()=>{
-        console.log("succesfully login");
+      next: (result: any) => {
+        // Store token in localStorage
+        localStorage.setItem('token', result.jwt);
+  
+        // Show success message
+        this.showSuccessMessage();
+  
+        // Navigate to layout page after a short delay
+        setTimeout(() => {
+          this.router.navigateByUrl('layout');
+        }, 2000);
+      },
+      error: (error) => {
+        // Remove token if login fails
+        localStorage.removeItem('token');
+  
+        // Extract meaningful error message
+        let errorMessage = 'Something went wrong! Check username or password.';
+        if (error.error && error.error.message) {
+          errorMessage = error.error.message;
+        } else if (error.status) {
+          errorMessage = `Error ${error.status}: ${error.statusText}`;
+         
+        }
+       
+        alert(errorMessage);
+        console.error('Error while login:', error);
+        this.showErrorMessage();
+      },
+      complete: () => {
+        console.log('Login request completed.');
       }
-    })
+    });
   }
+  
  register(){
 this.router.navigateByUrl('registration');
  }
+
+ showSuccessMessage() {
+  const successDiv = document.createElement('div');
+  successDiv.innerText = '🎉 You are successfully logged in!';
+  successDiv.style.position = 'fixed';
+  successDiv.style.top = '50%';
+  successDiv.style.left = '50%';
+  successDiv.style.transform = 'translate(-50%, -50%)';
+  successDiv.style.background = 'rgba(0, 128, 0, 0.8)';
+  successDiv.style.color = '#fff';
+  successDiv.style.padding = '15px 30px';
+  successDiv.style.borderRadius = '10px';
+  successDiv.style.fontSize = '18px';
+  successDiv.style.zIndex = '1000';
+  successDiv.style.textAlign = 'center';
+
+  document.body.appendChild(successDiv);
+
+  // Remove message after 2 seconds
+  setTimeout(() => {
+    successDiv.remove();
+  }, 2000);
+}
+
+
+showErrorMessage() {
+  const successDiv = document.createElement('div');
+  successDiv.innerText = '🎉 Email or Password are incorrect';
+  successDiv.style.position = 'fixed';
+  successDiv.style.top = '50%';
+  successDiv.style.left = '50%';
+  successDiv.style.transform = 'translate(-50%, -50%)';
+  successDiv.style.background = 'rgb(253, 1, 1)';
+  successDiv.style.color = '#fff';
+  successDiv.style.padding = '15px 30px';
+  successDiv.style.borderRadius = '10px';
+  successDiv.style.fontSize = '18px';
+  successDiv.style.zIndex = '1000';
+  successDiv.style.textAlign = 'center';
+
+  document.body.appendChild(successDiv);
+
+  // Remove message after 2 seconds
+  setTimeout(() => {
+    successDiv.remove();
+  }, 2000);
+}
+
+
 }

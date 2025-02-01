@@ -10,6 +10,7 @@ import { SignupRequest } from '../classes/sinup-request';
 })
 export class LoginService {
   baseurl="https://login-registration-0dc9bd014206.herokuapp.com";
+ // baseurl="http://localhost:8080";
 
   constructor(private http:HttpClient) { }
 
@@ -21,6 +22,6 @@ getmessage(){
 }
 
 signup(signupRequest: SignupRequest) {
-  return this.http.post(`${this.baseurl}/signup`, signupRequest,{ responseType: 'text' as 'json' });
+  return this.http.post(`${this.baseurl}/signup`, signupRequest);
 }
 }
