@@ -113,7 +113,6 @@ form{ width: 100%; }
         border: 2px solid #ccc;
         border-radius: 8px;
         font-size: 24px;
-        color: #333;
         margin: 0 8px;
     }
 
@@ -243,7 +242,7 @@ form{ width: 100%; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+ 
 }
 
 /* Form Styling */
@@ -311,14 +310,8 @@ form{ width: 100%; }
     padding: 20px;
   }
 
-  .registration-form h2 {
-    font-size: 24px;
-  }
-
-  .form-control, .form-select {
-    padding: 10px;
-    font-size: 14px;
-  }
+  
+  
 
   .btn-primary {
     padding: 10px;
@@ -356,3 +349,58 @@ form{ width: 100%; }
    
   }
   
+  .social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-link {
+    font-size: 24px;
+    color: #ffffff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Google Icon */
+.google {
+    background: #DB4437;
+}
+
+.google:hover {
+    background: #b93224;
+}
+
+/* Facebook Icon */
+.facebook {
+    background: #1877F2;
+}
+
+.facebook:hover {
+    background: #0d6efd;
+}
+
+/* GitHub Icon */
+.github {
+    background: #333;
+}
+
+.github:hover {
+    background: #000;
+}
+
+/* LinkedIn Icon */
+.linkedin {
+    background: #0A66C2;
+}
+
+.linkedin:hover {
+    background: #004182;
+}

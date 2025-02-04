@@ -4,12 +4,13 @@
       <form>
           <h1>Login</h1>
           <div class="input-box">
+            <span ><i class="fas fa-envelope"></i></span>
               <input type="text" [(ngModel)]="loginObj.email" name="email" placeholder="Email or Phonenumber" required>
-              <i class='bi bi-person'></i>
+              
           </div>
           <div class="input-box">
               <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Password" required>
-              <i class='bi bi-lock'></i>
+              <span><i class="fas fa-lock"></i></span>
           </div>
           <div class="forgot-link">
               <a href="#">Forgot Password?</a>
@@ -17,11 +18,14 @@
           <button type="submit" (click)="onLogin(loginObj)" class="btn">Login</button>
           <p>or login with social platforms</p>
           <div class="social-icons">
-              <a href="#"><i class='bi bi-google'></i></a>
-              <a href="#"><i class='bi bi-facebook'></i></a>
-              <a href="#"><i class='bi bi-github'></i></a>
-              <a href="#"><i class='bi bi-linkedin'></i></a>
-          </div>
+            <a href="#" class="social-link google"><i class="fa-brands fa-google" ></i></a>
+            <a href="#" class="social-link facebook"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="social-link github"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-link linkedin"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+        
+        
+        
       </form>
   </div>
 
