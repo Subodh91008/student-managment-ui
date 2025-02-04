@@ -328,62 +328,10 @@ form{ width: 100%; }
 
 
 
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  .form-box.register {
-    max-width: 400px;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    
-  }
-  
-  /* Input Field Styles */
-  .form-group {
-    position: relative;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px 40px; /* Space for icons */
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  /* Label Styles */
-  .form-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
-  /* Icon Styles */
-  .form-group .form-label i {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #888;
-  }
-  
-  /* Adjusting input for icons */
-  .form-group input {
-    padding-left: 35px;
-  }
-  
+
   /* Error Message Styles */
   .text-danger {
     font-size: 14px;
-    margin-top: 5px;
   }
   
   /* Button Styles */
@@ -403,6 +351,8 @@ body {
     margin: 20px;
   }
   .reg{
-    background-color: rgba(0, 123, 255, 0.5);
+   margin-top: 30px;
+   text-align: center;
+   
   }
   
