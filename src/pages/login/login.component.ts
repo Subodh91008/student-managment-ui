@@ -1,26 +1,47 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginUser } from '../../classes/LoginUser';
 import { LoginService } from '../../service/login.service';
+import { CommonModule } from '@angular/common';
+import { SignupRequest } from '../../classes/sinup-request';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   loginObj: LoginUser = {
     email: '',
     password: ''
   };
   
+   registrationForm!: FormGroup;
+    signupRequest: SignupRequest = {
+      firstName: '',
+      lastName: '',
+      phone: '',
+      gender: '',
+      email: '',
+      password: ''
+  };
+  
 
-constructor(private router:Router,private loginservice:LoginService){}
+constructor(private router:Router,private loginservice:LoginService,private fb: FormBuilder){}
   ngOnInit(): void {
     localStorage.clear()
+     // Initialize the form in ngOnInit
+     this.registrationForm = this.fb.group({
+      firstName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+    }, { validator: this.passwordMatchValidator });
   }
 
 
@@ -72,6 +93,7 @@ constructor(private router:Router,private loginservice:LoginService){}
   }
   
  register(){
+
 this.router.navigateByUrl('registration');
  }
 
@@ -121,6 +143,56 @@ showErrorMessage() {
     successDiv.remove();
   }, 2000);
 }
+
+isRegisterActive: boolean = false;
+
+  toggleRegister(status: boolean): void {
+    this.isRegisterActive = status;
+  }
+
+
+
+  // Custom validator to check if passwords match
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
+  }
+
+  onSubmit() {
+    if (this.registrationForm.invalid) {
+      console.log('Form is invalid');
+      return;
+    }
+  
+    console.log('Form Submitted:', this.registrationForm.value);
+  
+    this.loginservice.signup(this.signupRequest).subscribe({
+      next: (result) => {
+        alert('Successfully signed up');
+        this.isRegisterActive=false;
+        this.ngOnInit();
+        this.router.navigateByUrl('login');
+      },
+      error: (error) => {
+        console.error('Error during registration:', error);
+  
+        // Default error message
+        let errorMessage = 'Something went wrong. Please try again.';
+  
+        // Safely extract API error message
+        if (error.error && typeof error.error === 'object' && error.error.message) {
+          errorMessage = error.error.message;
+        } else if (error.status) {
+          errorMessage = `Error ${error.status}: ${error.statusText}`;
+        }
+  
+        alert(errorMessage);
+      }
+    });
+  }
+  
+  
 
 
 }

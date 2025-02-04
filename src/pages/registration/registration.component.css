@@ -2,7 +2,6 @@
 
 /* Background Image */
 .registration-container {
-  background: url('/image.png') no-repeat;
   background-size: cover;
   background-position: center;
   min-height: 100vh;

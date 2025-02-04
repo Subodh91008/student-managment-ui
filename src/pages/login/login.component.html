@@ -1,42 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    <div class="wrapper">
-        <form action="">
+<body class="bg-dark">
+<div class="container" [ngClass]="{'active': isRegisterActive}">
+  <div class="form-box login">
+      <form>
+          <h1>Login</h1>
+          <div class="input-box">
+              <input type="text" [(ngModel)]="loginObj.email" name="email" placeholder="Email or Phonenumber" required>
+              <i class='bi bi-person'></i>
+          </div>
+          <div class="input-box">
+              <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Password" required>
+              <i class='bi bi-lock'></i>
+          </div>
+          <div class="forgot-link">
+              <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" (click)="onLogin(loginObj)" class="btn">Login</button>
+          <p>or login with social platforms</p>
+          <div class="social-icons">
+              <a href="#"><i class='bi bi-google'></i></a>
+              <a href="#"><i class='bi bi-facebook'></i></a>
+              <a href="#"><i class='bi bi-github'></i></a>
+              <a href="#"><i class='bi bi-linkedin'></i></a>
+          </div>
+      </form>
+  </div>
 
-            <h1>Login</h1>
+  <div class="form-box register">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <!-- User Name -->
 
-            <div class="input-box">
-                <input type="text" [(ngModel)]="loginObj.email" name="email" placeholder="Email">
-                <i class='bx bxs-envelope'></i>
-            </div>
+     <div class="reg">
+      <h1>Registration</h1>
+     </div>
+      
+        
+        <div class="input-group">
+          <span class="input-group-text"> <i class="fas fa-user"></i></span>
+          <input type="text" [(ngModel)]="signupRequest.firstName" name="firstName" id="firstName" formControlName="firstName" class="form-control" placeholder="Enter your User Name" />
+        </div>
+        <div *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched" class="text-danger">
+          First Name is required.
+        </div>
+      
+  
+      <!-- Phone -->
+     
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-phone"></i></span>
+          <input type="tel" id="phone" [(ngModel)]="signupRequest.phone" name="phone" formControlName="phone" class="form-control" placeholder="Enter your phone number" />
+        </div>
+        <div *ngIf="registrationForm.get('phone')?.invalid && registrationForm.get('phone')?.touched" class="text-danger">
+          Please enter a valid phone number (10 digits).
+        </div>
+      
+      <!-- Email -->
+     
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" id="email" [(ngModel)]="signupRequest.email" name="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+        </div>
+        <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched" class="text-danger">
+          Please enter a valid email address.
+        </div>
+     
+  
+      <!-- Password -->
+    
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input type="password" id="password" [(ngModel)]="signupRequest.password" name="password" formControlName="password" class="form-control" placeholder="Enter your password" />
+        </div>
+        <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched" class="text-danger">
+          Password must be at least 6 characters long.
+        </div>
+     
+  
+      <!-- Confirm Password -->
+     
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm your password" />
+        </div>
+        <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched" class="text-danger">
+          Passwords do not match.
+        </div>
+      
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="registrationForm.invalid">
+        Register
+      </button>
+    </form>
+  </div>
+  
 
-            <div class="input-box">
-                <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Password">
-                <i class='bx bxs-lock-alt' ></i>
-            </div>
+  <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+          <h1>Hello, Welcome!</h1>
+          <p>Don't have an account?</p>
+          <button class="btn" (click)="toggleRegister(true)">Register</button>
+      </div>
 
-            <div class="remember-forget">
-                <label><input type="checkbox">Remember me</label>
-                <a href="#">Forgot password?</a>
-            </div>
-
-            <button type="submit" (click)="onLogin(loginObj)"  class="btn">Login</button>
-
-            <div class="register-link">
-                <p>Don't have an account? <br>
-                <a (click)="register()">Register</a></p>
-            </div>
-
-        </form>
-
-    </div>
+      <div class="toggle-panel toggle-right">
+          <h1>Welcome Back!</h1>
+          <p>Already have an account?</p>
+          <button class="btn" (click)="toggleRegister(false)">Login</button>
+      </div>
+  </div>
+</div>
 </body>
-</html>
